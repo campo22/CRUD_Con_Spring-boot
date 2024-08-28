@@ -11,17 +11,17 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
+    @NotEmpty(message = "{NotEmpty.product.name}")
     @Size(min = 2, max = 20)
     @Column(name = "name", nullable = false, columnDefinition = "varchar(25)")
     private String name;
 
     @Min(500)
-    @NotNull
+    @NotNull(message = "{NotNull.product.price}")
     private Integer price;
 
     @Column(name = "description", nullable = false, columnDefinition = "varchar(225)")
-    @NotBlank
+    @NotBlank(message = "{NotBlank.product.description}")
     private String description;
 
     public Long getId() {

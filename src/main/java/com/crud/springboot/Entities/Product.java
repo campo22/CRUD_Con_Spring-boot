@@ -1,5 +1,6 @@
 package com.crud.springboot.Entities;
 
+import com.crud.springboot.validation.IsRequired;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -11,7 +12,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "{NotEmpty.product.name}")
+    @IsRequired(message ="{IsRequired.product.name}" )
     @Size(min = 2, max = 20)
     @Column(name = "name", nullable = false, columnDefinition = "varchar(25)")
     private String name;
@@ -21,7 +22,7 @@ public class Product {
     private Integer price;
 
     @Column(name = "description", nullable = false, columnDefinition = "varchar(225)")
-    @NotBlank(message = "{NotBlank.product.description}")
+    @IsRequired
     private String description;
 
     public Long getId() {

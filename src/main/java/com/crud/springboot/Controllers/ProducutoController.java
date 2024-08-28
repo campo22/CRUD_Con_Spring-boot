@@ -1,6 +1,7 @@
 package com.crud.springboot.Controllers;
 
 import com.crud.springboot.Entities.Product;
+import com.crud.springboot.ProductValidation;
 import com.crud.springboot.Services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class ProducutoController {
     @Autowired
     private ProductService service;
 
+    @Autowired
+    private ProductValidation va;
+
     @GetMapping
     public List<Product> listar() {
         return service.findAll();
@@ -37,6 +41,9 @@ public class ProducutoController {
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody Product product, BindingResult resul) {
+
+       // va.validate(product, resul);
+
         if (resul.hasErrors()) {
             return validation(resul);
         }
@@ -44,9 +51,10 @@ public class ProducutoController {
     }
 
 
-
     @PutMapping("/{id}")
     public ResponseEntity<?> updatate(@Valid @RequestBody Product product, BindingResult resul, @PathVariable Long id) {
+        // va.validate(product, resul);
+
         if (resul.hasErrors()) {
             return validation(resul);
         }
@@ -71,7 +79,7 @@ public class ProducutoController {
     private ResponseEntity<?> validation(BindingResult resul) {
         Map<String, String> errors = new HashMap<>();
         resul.getFieldErrors().forEach(err -> {
-            errors.put(err.getField(),"El campo "+err.getField()+" "+err.getDefaultMessage());
+            errors.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage());
         });
         return ResponseEntity.badRequest().body(errors);
     }

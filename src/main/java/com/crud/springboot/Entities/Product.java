@@ -12,7 +12,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @IsRequired(message ="{IsRequired.product.name}" )
+    @IsRequired(message = "{IsRequired.product.name}")
     @Size(min = 2, max = 20)
     @Column(name = "name", nullable = false, columnDefinition = "varchar(25)")
     private String name;

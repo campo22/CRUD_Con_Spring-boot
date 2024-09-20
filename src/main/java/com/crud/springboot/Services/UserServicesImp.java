@@ -42,11 +42,13 @@ public class UserServicesImp implements UserServices{
         optionalRoleUser.ifPresent(roles::add);
 
         if (user.isAdmin()) {
-            Optional<Role> optional = rolRepository.findByName("ADMIN");
+            Optional<Role> optional = rolRepository.findByName("ROLE_ADMIN");
             optional.ifPresent(roles::add);
         }
         user.setRoles(roles);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEnabled(true);
+
         return userRepository.save(user);
     }
 

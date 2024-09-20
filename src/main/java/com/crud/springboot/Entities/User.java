@@ -1,5 +1,6 @@
 package com.crud.springboot.Entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -21,6 +22,7 @@ public class User {
 
     @Column(name = "password", nullable = false, columnDefinition = "varchar(10)")
     @NotBlank
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @ManyToMany
@@ -35,6 +37,11 @@ public class User {
     @Transient
     @Column(name = "is_admin", nullable = false)
     private Boolean admin = false; // Con valor por defecto.
+
+
+    @Column(name = "enabled", nullable = false,columnDefinition = "TINYINT(1)")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private boolean enabled;
 
     public Long getId() {
         return id;
@@ -74,5 +81,13 @@ public class User {
 
     public void setAdmin(Boolean admin) {
         this.admin = admin;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

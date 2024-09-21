@@ -1,11 +1,15 @@
 package com.crud.springboot.Entities;
 
+import com.crud.springboot.validation.ExistsByUsername;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name ="users")
@@ -15,6 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ExistsByUsername
     @Column(name = "username" , unique = true, nullable = false, columnDefinition = "varchar(15)")
     @NotBlank
     @Size(min = 2, max = 12)
@@ -25,6 +30,7 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    @JsonIgnoreProperties({"users", "hibernateLazyInitializer", "handler"})
     @ManyToMany
     @JoinTable(
             name = "users_roles",
@@ -33,6 +39,10 @@ public class User {
             uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "role_id"})
     )
     private List<Role> roles;
+
+    public User() {
+        this.roles = new ArrayList<>();
+    }
 
     @Transient
     @Column(name = "is_admin", nullable = false)
@@ -89,5 +99,18 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username);
     }
 }

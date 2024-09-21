@@ -1,7 +1,7 @@
 package com.crud.springboot.Controllers;
 
 import com.crud.springboot.Entities.Product;
-import com.crud.springboot.ProductValidation;
+import com.crud.springboot.validation.ProductValidation;
 import com.crud.springboot.Services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

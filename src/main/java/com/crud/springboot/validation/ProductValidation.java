@@ -1,4 +1,4 @@
-package com.crud.springboot;
+package com.crud.springboot.validation;
 
 import com.crud.springboot.Entities.Product;
 import org.springframework.stereotype.Component;

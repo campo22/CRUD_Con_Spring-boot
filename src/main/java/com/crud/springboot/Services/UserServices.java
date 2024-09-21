@@ -10,5 +10,6 @@ public interface UserServices {
 
     User seve(User user);
 
+    boolean existsByUsername(String username);
 
 }

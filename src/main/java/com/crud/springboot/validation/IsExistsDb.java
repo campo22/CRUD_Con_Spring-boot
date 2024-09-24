@@ -8,11 +8,11 @@ import java.lang.annotation.Target;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
-@Constraint(validatedBy =ExistsByUsernameValidation.class)
+@Constraint(validatedBy = com.crud.springboot.validation.IsExistsDbValidation.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ExistsByUsername {
-    String message() default "ya existe en la base de datos!, escoja otro username!";
+public @interface IsExistsDb {
+    String message() default "ya existe en la base de datos!";
 
     Class<?>[] groups() default {};
 

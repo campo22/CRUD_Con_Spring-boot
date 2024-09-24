@@ -1,6 +1,7 @@
 package com.crud.springboot.validation;
 
-import com.crud.springboot.Services.UserServices;
+import com.crud.springboot.Services.ProductService;
+import com.crud.springboot.validation.IsExistsDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,18 +11,19 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 @Component
-public class ExistsByUsernameValidation implements ConstraintValidator<ExistsByUsername, String> {
+public class IsExistsDbValidation implements ConstraintValidator<IsExistsDb, String>{
 
     @Autowired
-    private UserServices service;
+    private ProductService service;
 
     @Override
-    public boolean isValid(String username, ConstraintValidatorContext context) {
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        
         if (service == null) {
             return true;
         }
-        return !service.existsByUsername(username);
+
+        return !service.existsBySku(value);
     }
-    
     
 }

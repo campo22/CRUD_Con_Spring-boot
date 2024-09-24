@@ -36,7 +36,7 @@ public class UserServicesImp implements UserServices{
     @Transactional
     public User seve(User user) {
 
-        Optional<Role> optionalRoleUser = rolRepository.findByName("ADMIN");
+        Optional<Role> optionalRoleUser = rolRepository.findByName("ROLE_USER");
         List<Role> roles = new ArrayList<>();
 
         optionalRoleUser.ifPresent(roles::add);

@@ -1,19 +1,18 @@
-package com.crud.springboot.validation;
-
-import jakarta.validation.Constraint;
-import jakarta.validation.Payload;
+package com.andres.curso.springboot.app.springbootcrud.validation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy =RequiredValidation.class)
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.METHOD})
-public @interface IsRequired {
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
-    String message() default "hola mundo";
+@Constraint(validatedBy = RequiredValidation.class)
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.FIELD, ElementType.METHOD })
+public @interface IsRequired {
+    String message() default "es requerido usando anotaciones";
 
     Class<?>[] groups() default {};
 

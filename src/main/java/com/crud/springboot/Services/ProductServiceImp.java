@@ -57,4 +57,9 @@ public class ProductServiceImp implements ProductService {
         });
         return productOptiona;
     }
+
+    @Override
+    public boolean existsBySku(String value) {
+        return false;
+    }
 }

@@ -12,7 +12,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @com.andres.curso.springboot.app.springbootcrud.validation.IsRequired(message = "{IsRequired.product.name}")
+    @com.crud.springboot.validation.IsRequired(message = "{IsRequired.product.name}") // curso.springboot.app.springbootcrud.validation.IsRequired(message = "{IsRequired.product.name}")
     @Size(min = 2, max = 20)
     @Column(name = "name", nullable = false, columnDefinition = "varchar(25)")
     private String name;
@@ -22,7 +22,7 @@ public class Product {
     private Integer price;
 
     @Column(name = "description", nullable = false, columnDefinition = "varchar(225)")
-    @com.andres.curso.springboot.app.springbootcrud.validation.IsRequired
+    @com.crud.springboot.validation.IsRequired(message = "{IsRequired.product.description}") // curso.springboot.app.springbootcrud.validation.IsRequired
     private String description;
 
     public Long getId() {
